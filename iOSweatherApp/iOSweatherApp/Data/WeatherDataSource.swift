@@ -30,7 +30,6 @@ class WeatherDataSource {
                 default:
                     self.summary = nil
                 }
-                
                 self.group.leave()
             }
         }
@@ -144,3 +143,4 @@ extension WeatherDataSource {
     }
 
 }
+

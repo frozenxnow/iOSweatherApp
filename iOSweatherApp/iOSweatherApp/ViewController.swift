@@ -19,7 +19,6 @@ class ViewController: UIViewController {
         let location = CLLocation(latitude: 37.498206, longitude: 127.02861)
         WeatherDataSource.shared.fetch(location: location) {
             self.listTableView.reloadData()
-            print("location update")
         }
         
     }
@@ -38,7 +37,7 @@ extension ViewController: UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            return 0
+            return WeatherDataSource.shared.forecastList.count
         default:
             return 0
         }
@@ -48,18 +47,27 @@ extension ViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SummaryTableViewCell", for: indexPath) as! SummaryTableViewCell
             
-//            if let weather = WeatherDataSource.shared.summary?.weather.first, let main = WeatherDataSource.shared.summary?.main  {
-//                cell.weatherImageView.image = UIImage(named: weather.icon)
-//                cell.statusLabel.text = weather.description
-//                cell.minMaxLabel.text = "최고 \(main.temp_max)º / 최소 \(main.temp_min)º"
-//                cell.currentTemperatureLabel.text = "\(main.temp)º"
-//            }
+            if let weather = WeatherDataSource.shared.summary?.weather.first, let main = WeatherDataSource.shared.summary?.main  {
+                cell.weatherImageView.image = UIImage(named: weather.icon)
+                cell.statusLabel.text = weather.description
+                cell.minMaxLabel.text = "최고 \(main.temp_max.temperatureString) / 최소 \(main.temp_min.temperatureString)"
+                cell.currentTemperatureLabel.text = "\(main.temp.temperatureString)"
+            }
             
             return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ForecastTableViewCell", for: indexPath) as! ForecastTableViewCell
-            return cell
+            
         }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ForecastTableViewCell", for: indexPath) as! ForecastTableViewCell
+        
+        let target = WeatherDataSource.shared.forecastList[indexPath.row]
+        cell.dateLabel.text = target.date.dateString
+        cell.timeLabel.text = target.date.timeString
+        cell.weatherImageView.image = UIImage(named: target.icon)
+        cell.statusLabel.text = target.weather
+        cell.temperatureLabel.text = target.temperature.temperatureString
+        
+        return cell
         
     }
     

@@ -25,6 +25,13 @@ class ForecastTableViewCell: UITableViewCell {
     
     
     override func awakeFromNib() {
+        
+        backgroundColor = .clear
+        statusLabel.textColor = .white
+        temperatureLabel.textColor = statusLabel.textColor
+        dateLabel.textColor = statusLabel.textColor
+        timeLabel.textColor = statusLabel.textColor
+        
         super.awakeFromNib()
         // Initialization code
     }

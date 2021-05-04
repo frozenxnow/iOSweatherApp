@@ -22,6 +22,14 @@ class SummaryTableViewCell: UITableViewCell {
     
     
     override func awakeFromNib() {
+        
+        backgroundColor = .clear
+        
+        statusLabel.textColor = .white
+        minMaxLabel.textColor = statusLabel.textColor
+        currentTemperatureLabel.textColor = statusLabel.textColor
+        
+        
         super.awakeFromNib()
         // Initialization code
     }

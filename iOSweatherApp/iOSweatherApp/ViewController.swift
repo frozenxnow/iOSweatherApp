@@ -12,9 +12,32 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var listTableView: UITableView!
     
+    var topInset = CGFloat(0.0)
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if topInset == 0.0 {
+            let firstIndexPath = IndexPath(row: 0, section: 0)
+            if let cell = listTableView.cellForRow(at: firstIndexPath) {
+                topInset = listTableView.frame.height - cell.frame.height
+                
+                var inset = listTableView.contentInset
+                inset.top = topInset
+                listTableView.contentInset = inset
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        listTableView.backgroundColor = .clear
+        listTableView.separatorStyle = .none
+        listTableView.showsVerticalScrollIndicator = false
+        
+        
         
         let location = CLLocation(latitude: 37.498206, longitude: 127.02861)
         WeatherDataSource.shared.fetch(location: location) {

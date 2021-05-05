@@ -20,6 +20,7 @@
 		F2D8AD2B2619B497006ADE9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2D8AD2A2619B497006ADE9B /* Assets.xcassets */; };
 		F2D8AD2E2619B497006ADE9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2D8AD2C2619B497006ADE9B /* LaunchScreen.storyboard */; };
 		F2D8AD382619B850006ADE9B /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D8AD372619B850006ADE9B /* Common.swift */; };
+		F2F1D2B02642940D009E5822 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F1D2AF2642940D009E5822 /* LocationManager.swift */; };
 		F2FB849A261B07170013859C /* ForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FB8499261B07170013859C /* ForecastTableViewCell.swift */; };
 		F2FB849E261B07270013859C /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FB849D261B07270013859C /* SummaryTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		F2D8AD2D2619B497006ADE9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2D8AD2F2619B497006ADE9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2D8AD372619B850006ADE9B /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		F2F1D2AF2642940D009E5822 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		F2FB8499261B07170013859C /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewCell.swift; sourceTree = "<group>"; };
 		F2FB849D261B07270013859C /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,6 +114,7 @@
 		F2D8AD202619B496006ADE9B /* iOSweatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				F2F1D2AE26429400009E5822 /* Location */,
 				F241C365263BBA7F0088291D /* Formatter */,
 				F2BBB2AE2638569600D63FFC /* Data */,
 				F2BBB2A32638546000D63FFC /* Model */,
@@ -127,6 +130,14 @@
 				F2D8AD2F2619B497006ADE9B /* Info.plist */,
 			);
 			path = iOSweatherApp;
+			sourceTree = "<group>";
+		};
+		F2F1D2AE26429400009E5822 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				F2F1D2AF2642940D009E5822 /* LocationManager.swift */,
+			);
+			path = Location;
 			sourceTree = "<group>";
 		};
 		F2FB8495261B04640013859C /* Cell */ = {
@@ -220,6 +231,7 @@
 				F2BBB2B0263856A500D63FFC /* WeatherDataSource.swift in Sources */,
 				F2FB849E261B07270013859C /* SummaryTableViewCell.swift in Sources */,
 				F2D8AD242619B496006ADE9B /* SceneDelegate.swift in Sources */,
+				F2F1D2B02642940D009E5822 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

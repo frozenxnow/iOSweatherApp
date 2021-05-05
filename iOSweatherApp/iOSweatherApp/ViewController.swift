@@ -37,13 +37,13 @@ class ViewController: UIViewController {
         listTableView.separatorStyle = .none
         listTableView.showsVerticalScrollIndicator = false
         
-        
-        
         let location = CLLocation(latitude: 37.498206, longitude: 127.02861)
         WeatherDataSource.shared.fetch(location: location) {
             self.listTableView.reloadData()
         }
         
+        LocationManager.shared.updateLocation()
+    
     }
 
 

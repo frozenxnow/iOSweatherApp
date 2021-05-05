@@ -21,6 +21,8 @@ class LocationManager: NSObject {
     
     let manager: CLLocationManager
     
+    var currentLocationTitle: String?
+    
     func updateLocation() {
         let status: CLAuthorizationStatus
         
@@ -54,6 +56,28 @@ extension LocationManager: CLLocationManagerDelegate {
         manager.requestLocation()
     }
     
+    private func updateAddress (from location: CLLocation) {
+        // 전달받은 좌표를 문자열로 변환하는 것 : Reverse Geocoding
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
+            if let error = error {
+                print(error)
+                self?.currentLocationTitle = "Unknown"
+                return
+            }
+            
+            if let placemark = placemarks?.first {
+                if let gu = placemark.locality, let dong = placemark.subLocality {
+                    self?.currentLocationTitle = "\(gu) \(dong)"
+                } else {
+                    self?.currentLocationTitle = placemark.name ?? "Unknown"
+                }
+            }
+            
+            print(self?.currentLocationTitle)
+        }
+    }
+    
     @available(iOS 14.0, *)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
@@ -80,7 +104,11 @@ extension LocationManager: CLLocationManagerDelegate {
     
     // 위치정보가 업데이트되면 (새로운 위치가 전달되면) 반복적으로 호출
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(locations.last)
+//        print(locations.last)
+        
+        if let location = locations.last {
+            updateAddress(from: location)
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

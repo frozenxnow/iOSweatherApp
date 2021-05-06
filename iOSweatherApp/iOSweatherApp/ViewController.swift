@@ -12,6 +12,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var listTableView: UITableView!
     
+    @IBOutlet weak var locationLabel: UILabel!
+    
+    @IBOutlet weak var loader: UIActivityIndicatorView!
+    
+    
     var topInset = CGFloat(0.0)
     
     override func viewDidLayoutSubviews() {
@@ -31,18 +36,32 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        listTableView.alpha = 0.0
+        loader.alpha = 1.0
         
         listTableView.backgroundColor = .clear
         listTableView.separatorStyle = .none
         listTableView.showsVerticalScrollIndicator = false
         
-        let location = CLLocation(latitude: 37.498206, longitude: 127.02861)
-        WeatherDataSource.shared.fetch(location: location) {
-            self.listTableView.reloadData()
-        }
+        // 고정된 임시좌표 이용할 때 사용 
+//        let location = CLLocation(latitude: 37.498206, longitude: 127.02861)
+//        WeatherDataSource.shared.fetch(location: location) {
+//            self.listTableView.reloadData()
+//        }
         
         LocationManager.shared.updateLocation()
+        
+        NotificationCenter.default.addObserver(forName: WeatherDataSource.weatherInfoDidUpdate, object: nil, queue: .main) { (noti) in
+            self.listTableView.reloadData()
+            self.locationLabel.text = LocationManager.shared.currentLocationTitle
+            
+            UIView.animate(withDuration: 0.3) {
+                self.listTableView.alpha = 1.0
+                self.loader.alpha = 0.0
+            }
+            
+        }
     
     }
 

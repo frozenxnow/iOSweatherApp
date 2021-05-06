@@ -173,12 +173,18 @@
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="gWe-zK-YKz"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="GWL-v0-HZR">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="kJZ-hN-aqv" firstAttribute="bottom" secondItem="FhX-ft-Lht" secondAttribute="bottom" id="34R-es-ZBh"/>
                             <constraint firstItem="kJZ-hN-aqv" firstAttribute="top" secondItem="FhX-ft-Lht" secondAttribute="top" id="3f1-FW-HEs"/>
+                            <constraint firstItem="GWL-v0-HZR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DUd-zY-dwr"/>
+                            <constraint firstItem="GWL-v0-HZR" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="J6t-Oz-QDe"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="uTm-kj-AZV" secondAttribute="bottom" id="NnJ-dC-esO"/>
                             <constraint firstItem="kJZ-hN-aqv" firstAttribute="leading" secondItem="FhX-ft-Lht" secondAttribute="leading" id="OOk-91-GyP"/>
                             <constraint firstItem="FhX-ft-Lht" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="PB0-r5-V8g"/>
@@ -196,6 +202,8 @@
                     </view>
                     <connections>
                         <outlet property="listTableView" destination="uTm-kj-AZV" id="FBD-YP-rno"/>
+                        <outlet property="loader" destination="GWL-v0-HZR" id="xSc-wt-HlM"/>
+                        <outlet property="locationLabel" destination="Bec-yZ-10e" id="mdW-SJ-xEW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

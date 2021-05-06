@@ -21,7 +21,20 @@ class LocationManager: NSObject {
     
     let manager: CLLocationManager
     
-    var currentLocationTitle: String?
+    var currentLocationTitle: String? {
+        // property observer 추가
+        didSet {
+            var userInfo = [AnyHashable: Any]()
+            if let location = currentLocation {
+                userInfo["location"] = location
+            }
+            
+            NotificationCenter.default.post(name: Self.currentLocationDidUpdate, object: nil, userInfo: userInfo)
+        }
+    }
+    var currentLocation: CLLocation?
+    
+    static let currentLocationDidUpdate = Notification.Name(rawValue: "currentLocationDidUpdate")
     
     func updateLocation() {
         let status: CLAuthorizationStatus
@@ -104,10 +117,13 @@ extension LocationManager: CLLocationManagerDelegate {
     
     // 위치정보가 업데이트되면 (새로운 위치가 전달되면) 반복적으로 호출
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        print(locations.last)
         
         if let location = locations.last {
-            updateAddress(from: location)
+            currentLocation = location
+            updateAddress(from: location) // reverse geocoding
+            
+            // 좌표를 얻어 API 요청을 전달해야한다. 새로운 좌표가 전달되면 속성에 저장하고, notification을 포스팅
+            // weather data source에서 notification 옵저버를 추가하고, 좌표가 전달되면 API 요청
         }
     }
     
